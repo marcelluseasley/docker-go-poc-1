@@ -16,7 +16,10 @@ func main() {
 
 	port := "8080"
 	logrus.Info("starting host on port: " + port)
-	http.ListenAndServe(fmt.Sprintf(":%s", port), createRouter())
+	err := http.ListenAndServe(fmt.Sprintf(":%s", port), createRouter())
+	if err != nil {
+		logrus.Fatalf("error: httpListenAndServe: %v", err)
+	}
 }
 
 func createRouter() *chi.Mux {
@@ -31,5 +34,11 @@ func createRouter() *chi.Mux {
 
 func indexHandler(w http.ResponseWriter, r *http.Request){
 		
-	w.Write([]byte("welcome people to the world"))
+	n, err := w.Write([]byte("welcome people to the world"))
+	if err != nil {
+		logrus.Printf("Error writing response: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	logrus.Printf("wrote %d bytes to response", n)
 }
