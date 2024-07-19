@@ -7,6 +7,9 @@ clone_folder: /usr/go/src/github.com/$username/$project
 
 environment:
   GOPATH: /usr/go/
+  # Define the username and project environment variables
+  username: marcelluseasley
+  project: docker-go-poc-1
 
 stack: go 1.10
 
