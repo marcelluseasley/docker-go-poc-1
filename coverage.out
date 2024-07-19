@@ -1,0 +1,5 @@
+mode: count
+github.com/marcelluseasley/dock-kube-poc-1/foo/foo.go:4.43,6.2 1 2
+github.com/marcelluseasley/dock-kube-poc-1/main.go:14.13,20.2 3 0
+github.com/marcelluseasley/dock-kube-poc-1/main.go:22.30,30.2 4 1
+github.com/marcelluseasley/dock-kube-poc-1/main.go:32.58,35.2 1 1

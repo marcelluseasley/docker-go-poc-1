@@ -1,0 +1,30 @@
+name: Run Go Tests
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: 'go.mod'
+
+    - name: Get dependencies
+      run: go mod download
+
+    - name: Test with Coverage
+      run: go test -v -covermode=count -coverprofile=coverage.out ./...
+
+    - name: Coverage Percentage Check
+      run: |
+        go tool cover -func=coverage.out | grep total: | awk '{print substr($3, 1, length($3)-1)}' | awk '{ if($1 < 60) { print "Coverage under 60%, build failed"; exit 1 } else { print "Coverage is acceptable" } }'
