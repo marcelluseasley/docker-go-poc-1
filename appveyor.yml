@@ -13,8 +13,22 @@ environment:
 
 stack: go 1.22
 
+
+install:
+  # Install Docker if not already available in the environment
+  - sudo apt-get update
+  - sudo apt-get install -y docker.io
+  # Start Docker service
+  - sudo systemctl start docker
+  # Verify Docker installation
+  - docker --version
+
+build_script:
+  - docker build -t marcelluseasley/dock-kube-poc-1 -f Dockerfile.dev . 
+
 before_test:
-  - go vet ./...
+  - go vet ./...  
 
 test_script:
+
   - go test ./...
