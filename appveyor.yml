@@ -11,7 +11,7 @@ environment:
   username: marcelluseasley
   project: docker-go-poc-1
 
-stack: go 1.10
+stack: go 1.22
 
 before_test:
   - go vet ./...
