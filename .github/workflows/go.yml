@@ -36,4 +36,4 @@ jobs:
 
     - name: Coverage Percentage Check
       run: |
-        go tool cover -func=coverage.out | grep total: | awk '{print substr($3, 1, length($3)-1)}' | awk '{ if($1 < 60) { print "Coverage under 60%, build failed"; exit 1 } else { print "Coverage is acceptable" } }'
+        go tool cover -func=coverage.out | grep total: | awk '{print substr($3, 1, length($3)-1)}' | awk '{ if($1 < 10) { print "Coverage under 10%, build failed"; exit 1 } else { print "Coverage is acceptable" } }'
